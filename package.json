@@ -7,20 +7,26 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prettier": "prettier --write src/index.js",
-    "dev": "nodemon src/index.js"
+    "prettier": "prettier --write src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node build/index.js"
   },
   "devDependencies": {
     "husky": "^4.2.5",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "ts-node": "^8.10.2"
   },
   "dependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.13",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "typescript": "^3.9.5"
   },
   "husky": {
     "hooks": {

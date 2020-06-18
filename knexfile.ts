@@ -1,6 +1,7 @@
 // Update with your config settings.
-const { config } = require('dotenv');
+import { config } from 'dotenv';
 config();
+
 module.exports = {
   development: {
     client: 'mysql',
@@ -8,12 +9,12 @@ module.exports = {
       database: process.env.DATABASE,
     },
     migrations: {
-      extension: 'js',
+      extension: 'ts',
       tableName: 'knex_migrations',
       directory: `${__dirname}/src/databases/migrations`,
     },
     seeds: {
-      extension: 'js',
+      extension: 'ts',
       directory: `${__dirname}/src/database/seeds`,
     },
     useNullAsDefault: true,
