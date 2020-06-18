@@ -1,0 +1,30 @@
+{
+  "name": "knex-sample",
+  "version": "1.0.0",
+  "description": "Sample NodeJS app with KnexJS Building Query",
+  "main": "src/index.js",
+  "author": "SOMON SOUM",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prettier": "prettier --write src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "mysql": "^2.18.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
