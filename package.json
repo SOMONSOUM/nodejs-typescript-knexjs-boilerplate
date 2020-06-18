@@ -1,7 +1,7 @@
 {
   "name": "knex-sample",
   "version": "1.0.0",
-  "description": "Sample NodeJS app with KnexJS Building Query",
+  "description": "Sample NodeJS app with KnexJS Query Builder",
   "main": "src/index.js",
   "author": "SOMON SOUM",
   "license": "MIT",
@@ -22,10 +22,14 @@
   "dependencies": {
     "@types/express": "^4.17.6",
     "@types/node": "^14.0.13",
+    "@types/password-hash": "^1.2.20",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.1",
-    "mysql": "^2.18.1",
+    "moment": "^2.26.0",
+    "mysql2": "^2.1.0",
+    "password-hash": "^1.2.2",
+    "sqlite3": "^4.2.0",
     "typescript": "^3.9.5"
   },
   "husky": {

@@ -4,10 +4,8 @@ config();
 
 module.exports = {
   development: {
-    client: 'mysql',
-    connection: {
-      database: process.env.DATABASE,
-    },
+    client: 'mysql2',
+    connection: process.env.DATABASE,
     migrations: {
       extension: 'ts',
       tableName: 'knex_migrations',
@@ -15,7 +13,7 @@ module.exports = {
     },
     seeds: {
       extension: 'ts',
-      directory: `${__dirname}/src/database/seeds`,
+      directory: `${__dirname}/src/databases/seeds`,
     },
     useNullAsDefault: true,
   },
