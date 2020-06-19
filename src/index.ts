@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { config } from 'dotenv';
 import { routes } from './routes/routes';
 
@@ -13,6 +13,18 @@ app.get('/', (req, res) => {
 });
 app.use(express.json());
 app.use(routes);
+
+// Catch alll errors
+app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  res.status(error.status || 500);
+  res.json({ error: error.message });
+});
+
+app.use((req: Request, res: Response) => {
+  if (res.status(404)) {
+    return res.json({ error: 'Not Found' });
+  }
+});
 
 app
   .listen(PORT, () =>

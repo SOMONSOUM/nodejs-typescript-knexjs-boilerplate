@@ -2,26 +2,22 @@ import { Request, Response, NextFunction } from 'express';
 import hash from 'password-hash';
 import { knex } from '../../databases/setting';
 
-export const index = async (res: Response) => {
+export const index = async (req: Request, res: Response) => {
   const users = await knex('users').orderBy('id', 'asc');
-  return res.json(users);
+  return res.json({ users });
 };
 
-export const show = async (req: Request, res: Response, next: NextFunction) => {
+export const show = async (req: Request, res: Response) => {
   try {
-    const id = req.params;
-    const user = await knex('users').where(id);
+    const { id } = req.params;
+    const user = await knex('users').where({ id });
     return res.status(200).json(user);
   } catch (error) {
-    return next(error);
+    return res.json(error);
   }
 };
 
-export const create = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const create = async (req: Request, res: Response) => {
   try {
     const { username, email, password, phone_number } = req.body;
     const user = await knex('users').insert({
@@ -30,19 +26,15 @@ export const create = async (
       password: hash.generate(password),
       phone_number,
     });
-    return res.status(200).json(user);
+    return res.status(200).json({ user });
   } catch (error) {
-    return next(error);
+    return res.json(error);
   }
 };
 
-export const update = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const update = async (req: Request, res: Response) => {
   try {
-    const id = req.params;
+    const { id } = req.params;
     const { username, email, password, phone_number } = req.body;
     const user = await knex('users')
       .update({
@@ -51,18 +43,19 @@ export const update = async (
         password: hash.generate(password),
         phone_number,
       })
-      .where(id);
-    return res.status(200).json(user);
+      .where({ id });
+    return res.status(200).json({ user });
   } catch (error) {
-    return next(error);
+    return res.json(error);
   }
 };
 
-export const remove = async (req: Request, res: Response) => {
+export const del = async (req: Request, res: Response) => {
   try {
-    const id = req.params;
-    await knex('users').where(id).del();
+    const { id } = req.params;
+    await knex('users').where({ id }).delete();
+    return res.json(`User has id=${id} has been deleted`);
   } catch (error) {
-    return res.json(`Doesn't exist!`);
+    return res.json(error);
   }
 };
